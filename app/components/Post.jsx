@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { create } from 'kubo-rpc-client'
-import axios from 'axios'
-import FormData from 'form-data'
+// import axios from 'axios'
+// import FormData from 'form-data'
 require('dotenv').config()
 
 const projectId = '2V4hWthxYCcZBjzD3SNmI2nyFun'

@@ -1,6 +1,6 @@
 import NonFungibleToken from 0x631e88ae7f1d7c20
 
-pub contract MyNFT: NonFungibleToken {
+pub contract PostNFT: NonFungibleToken {
 
   pub var totalSupply: UInt64
   pub var likeCount: UInt64
@@ -20,17 +20,17 @@ pub contract MyNFT: NonFungibleToken {
     pub var stringDictionary: {String: String}
 
     init(_ipfsHash: String, _metadata: {String: String}, _stringDictionary: {String: String}) {
-      self.id = MyNFT.totalSupply
-      MyNFT.totalSupply = MyNFT.totalSupply + 1
+      self.id = PostNFT.totalSupply
+      PostNFT.totalSupply = PostNFT.totalSupply + 1
 
-      self.likeCount= MyNFT.likeCount
+      self.likeCount= PostNFT.likeCount
       self.stringDictionary = _stringDictionary
       self.ipfsHash = _ipfsHash
       self.metadata = _metadata
     }
 
     pub fun increaseLikeCount() {
-      MyNFT.likeCount = MyNFT.likeCount + 1
+      self.likeCount = self.likeCount + 1
     }
 
     pub fun mutateStringDictionary(key: String, value: String) {
@@ -39,7 +39,7 @@ pub contract MyNFT: NonFungibleToken {
   }
 
   pub resource interface CollectionPublic {
-    pub fun borrowEntireNFT(id: UInt64): &MyNFT.NFT
+    pub fun borrowEntireNFT(id: UInt64): &PostNFT.NFT
   }
 
   pub resource Collection: NonFungibleToken.Receiver, NonFungibleToken.Provider, NonFungibleToken.CollectionPublic, CollectionPublic {
@@ -47,7 +47,7 @@ pub contract MyNFT: NonFungibleToken {
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
     pub fun deposit(token: @NonFungibleToken.NFT) {
-      let myToken <- token as! @MyNFT.NFT
+      let myToken <- token as! @PostNFT.NFT
       emit Deposit(id: myToken.id, to: self.owner?.address)
       self.ownedNFTs[myToken.id] <-! myToken
     }
@@ -66,9 +66,9 @@ pub contract MyNFT: NonFungibleToken {
       return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
     }
 
-    pub fun borrowEntireNFT(id: UInt64): &MyNFT.NFT {
+    pub fun borrowEntireNFT(id: UInt64): &PostNFT.NFT {
       let reference = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-      return reference as! &MyNFT.NFT
+      return reference as! &PostNFT.NFT
     }
 
     init() {
@@ -84,7 +84,7 @@ pub contract MyNFT: NonFungibleToken {
     return <- create Collection()
   }
 
-  pub fun createToken(ipfsHash: String, metadata: {String: String}, stringDictionary: {String: String}): @MyNFT.NFT {
+  pub fun createToken(ipfsHash: String, metadata: {String: String}, stringDictionary: {String: String}): @PostNFT.NFT {
     var NewNFT <- create NFT(_ipfsHash: ipfsHash, _metadata: metadata, _stringDictionary: stringDictionary)
     self.mintedNFTs[NewNFT.id] = NewNFT.owner?.address
     self.minters[NewNFT.id] = NewNFT.owner?.address

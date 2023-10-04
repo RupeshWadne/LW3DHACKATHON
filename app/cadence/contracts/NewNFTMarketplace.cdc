@@ -3,7 +3,7 @@ import PostNFT from 0x80ea21971a7ab25b
 import FungibleToken from 0x9a0766d93b6608b7
 import FlowToken from 0x7e60df042a9c0868
 
-pub contract NFTMarketplace {
+pub contract NewNFTMarketplace {
 
   pub struct SaleItem {
     pub let price: UFix64
