@@ -12,7 +12,7 @@ fcl.config()
   .put("accessNode.api", "https://access-testnet.onflow.org")
   .put("discovery.wallet", "https://fcl-discovery.onflow.org/testnet/authn")
 
-const page = ({params}) => {
+const Page = ({params}) => {
     const [nfts, setNFTs] = useState([]);
     const [user, setUser] = useState({})
 
@@ -88,4 +88,4 @@ const likePost = async (nftId) => {
   );
 }
 
-export default page
+export default Page
