@@ -1,10 +1,8 @@
 "use client"
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
-import {useState, useEffect} from 'react';
-
 
 import {getNFTsScript} from "../../cadence/scripts/get_user_nfts.js"
 import {getUsersProfile} from "../../cadence/scripts/get_users.js"

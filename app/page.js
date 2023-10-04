@@ -50,11 +50,7 @@ export default function Home() {
     console.log(result);
     setProfile(result);
   }catch(error){
-    console.log(error.toString())
-    error ? toast({
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-    }): ""
+    console.log(error)
   }
   }
 
