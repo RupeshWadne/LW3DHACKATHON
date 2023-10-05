@@ -23,6 +23,7 @@
     "kubo-rpc-client": "^3.0.1",
     "lucide-react": "^0.279.0",
     "next": "latest",
+    "node-fetch": "^3.3.2",
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "^1.14.0",
