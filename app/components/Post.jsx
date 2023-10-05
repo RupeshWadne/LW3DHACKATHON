@@ -111,7 +111,7 @@ const Post = ({ mint, show, setShow, profileName }) => {
           type="text"
           required
           placeholder="ipfsHash"
-          onChange={(e) =>setIpfsHash(`https://ipfs.infura.io/ipfs/${e.target.value}`)}
+          onChange={(e) =>setIpfsHash(e.target.value)}
         />
 
         <Button
