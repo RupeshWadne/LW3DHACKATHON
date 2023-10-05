@@ -77,7 +77,7 @@ const Post = ({ mint, show, setShow, profileName }) => {
           X
         </span>
 
-        <h2>What's on your mind:<span className="text-emerald-400">{profileName}</span></h2>
+        <h2>What is on your mind:<span className="text-emerald-400">{profileName}</span></h2>
 
         <Textarea
           value={description}
