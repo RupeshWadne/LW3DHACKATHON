@@ -15,6 +15,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { mintNFT } from "./cadence/transactions/mint_nft"
 import { setupUserTx } from "./cadence/transactions/setup_user"
 import { getUsersProfile } from "./cadence/scripts/get_users.js"
+import { getAllPosts } from "./cadence/scripts/get_all_posts.js"
 
 
 fcl.config()
@@ -31,11 +32,18 @@ export default function Home() {
   useEffect(() => {
     // sets the `user` variable to the person that is logged in through Blocto
     fcl.currentUser().subscribe(setUser);
+    getPosts()
   }, [])
 
   const logIn = async () => {
     // log in through Blocto
     fcl.authenticate();
+  }
+
+  const logOut = async () => {
+    // log in through Blocto
+    fcl.unauthenticate()
+    setProfile({})
   }
 
   const getUserProfile = async (address) => {
@@ -49,6 +57,19 @@ export default function Home() {
 
     console.log(result);
     setProfile(result);
+  }catch(error){
+    console.log(error)
+  }
+  }
+
+  const getPosts = async () => {
+    try{
+    const result = await fcl.send([
+      fcl.script(getAllPosts),
+      fcl.args([])
+    ]).then(fcl.decode);
+
+    console.log(result);
   }catch(error){
     console.log(error)
   }
@@ -106,7 +127,7 @@ export default function Home() {
           {
             user && user.addr ?
               <div className="flex items-center">
-                <Button onClick={() => fcl.unauthenticate()}>
+                <Button onClick={() => logOut()}>
                   Log Out
                 </Button>
                 <Button variant="link" className="text-white">{user && user.addr ? <Link href="/">{user.addr}</Link> : "You are not logged in"}</Button>
@@ -133,7 +154,7 @@ export default function Home() {
                   <p className="mb-4">Username: {profile.name}</p>
                   <Button variant="link" className="text-white mb-4"><p>Address: <Link href={`/profile/${user?.addr}`}>{user?.addr}</Link></p></Button>
                   <div className={`fixed z-10 overflow-auto ml-4  bg-[rgba(0,0,0,0.4) left-10 right-10 top-10 w-full h-full] ${show ? "flex justify-center items-center" : "hidden"}`}>
-                    <Post mint={mint} show={show} setShow={setShow} />
+                    <Post mint={mint} show={show} setShow={setShow}  profileName={profile.name}/>
                   </div>
                   <Button onClick={() => !show ? setShow(true) : setShow(false)}>Post</Button>
                 </div>

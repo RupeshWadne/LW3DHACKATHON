@@ -3,7 +3,6 @@ import NonFungibleToken from 0x631e88ae7f1d7c20
 pub contract MyNFT: NonFungibleToken {
 
   pub var totalSupply: UInt64
-  pub var likeCount: UInt64
   pub var mintedNFTs: {UInt64: Address}
   // keep track of all minters
   pub var minters: {UInt64: Address}
@@ -19,11 +18,11 @@ pub contract MyNFT: NonFungibleToken {
     pub var likeCount: UInt64
     pub var stringDictionary: {String: String}
 
-    init(_ipfsHash: String, _metadata: {String: String}, _stringDictionary: {String: String}) {
+    init(_ipfsHash: String, _metadata: {String: String}, _stringDictionary: {String: String},_likeCount:) {
       self.id = MyNFT.totalSupply
       MyNFT.totalSupply = MyNFT.totalSupply + 1
 
-      self.likeCount= MyNFT.likeCount
+      self.likeCount= _likeCount
       self.stringDictionary = _stringDictionary
       self.ipfsHash = _ipfsHash
       self.metadata = _metadata
@@ -101,7 +100,6 @@ pub contract MyNFT: NonFungibleToken {
 
   init() {
     self.totalSupply = 0
-    self.likeCount = 0
     self.mintedNFTs = {}
     // Initialize the minters dictionary
     self.minters = {}

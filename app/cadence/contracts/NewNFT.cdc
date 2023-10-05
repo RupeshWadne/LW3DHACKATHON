@@ -3,7 +3,6 @@ import NonFungibleToken from 0x631e88ae7f1d7c20
 pub contract PostNFT: NonFungibleToken {
 
   pub var totalSupply: UInt64
-  pub var likeCount: UInt64
   pub var mintedNFTs: {UInt64: Address}
   // keep track of all minters
   pub var minters: {UInt64: Address}
@@ -19,11 +18,11 @@ pub contract PostNFT: NonFungibleToken {
     pub var likeCount: UInt64
     pub var stringDictionary: {String: String}
 
-    init(_ipfsHash: String, _metadata: {String: String}, _stringDictionary: {String: String}) {
+    init(_ipfsHash: String, _metadata: {String: String}, _stringDictionary: {String: String}, _likeCount: UInt64) {
       self.id = PostNFT.totalSupply
       PostNFT.totalSupply = PostNFT.totalSupply + 1
 
-      self.likeCount= PostNFT.likeCount
+      self.likeCount= _likeCount
       self.stringDictionary = _stringDictionary
       self.ipfsHash = _ipfsHash
       self.metadata = _metadata
@@ -84,24 +83,23 @@ pub contract PostNFT: NonFungibleToken {
     return <- create Collection()
   }
 
-  pub fun createToken(ipfsHash: String, metadata: {String: String}, stringDictionary: {String: String}): @PostNFT.NFT {
-    var NewNFT <- create NFT(_ipfsHash: ipfsHash, _metadata: metadata, _stringDictionary: stringDictionary)
-    self.mintedNFTs[NewNFT.id] = NewNFT.owner?.address
-    self.minters[NewNFT.id] = NewNFT.owner?.address
+  pub fun createToken(ipfsHash: String, metadata: {String: String}, stringDictionary: {String: String}, likeCount: UInt64): @PostNFT.NFT {
+    var NewNFT <- create NFT(_ipfsHash: ipfsHash, _metadata: metadata, _stringDictionary: stringDictionary, _likeCount: likeCount)
+    PostNFT.mintedNFTs[NewNFT.id] = NewNFT.owner?.address
+    PostNFT.minters[NewNFT.id] = NewNFT.owner?.address
     return <- NewNFT
   }
 
   pub fun getMinters(id: UInt64): Address? {
-    return self.minters[id]
+    return PostNFT.minters[id]
   }
 
   pub fun getMintedNFTs(): {UInt64: Address} {
-    return self.mintedNFTs
+    return PostNFT.mintedNFTs
   }
 
   init() {
     self.totalSupply = 0
-    self.likeCount = 0
     self.mintedNFTs = {}
     // Initialize the minters dictionary
     self.minters = {}
