@@ -74,7 +74,7 @@ const Post = ({ mint, show, setShow, profileName }) => {
           className="text-white cursor-pointer"
           onClick={() => closeModal()}
         >
-          &times;
+          X
         </span>
 
         <h2>What's on your mind:<span className="text-emerald-400">{profileName}</span></h2>
