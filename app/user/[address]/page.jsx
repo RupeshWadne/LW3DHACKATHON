@@ -8,7 +8,7 @@ import * as t from '@onflow/types'
 // import Navbar from '../../components/Navbar'
 import Post from '../../components/Post'
 import { Button } from '@/components/ui/button'
-// import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui/input'
 // import { useToast } from '@/components/ui/use-toast'
 // import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
@@ -28,6 +28,7 @@ const Page = ({ params }) => {
   const [profile, setProfile] = useState({})
   const [username, setUsername] = useState('')
   const [show, setShow] = useState(false)
+  const [address, setAddress] = useState('')
   const router = useRouter()
 
   useEffect(() => {
@@ -86,14 +87,14 @@ const Page = ({ params }) => {
 
   return (
     <div>
-      <div className="flex justify-between m-4">
+      <div className="flex justify-around m-4">
         <h1 className="text-emerald-400 font-bold">Flowtter</h1>
         <div>{<Button onClick={() => logOut()}>Disconnect</Button>}</div>
 
         {/* <Navbar /> */}
       </div>
 
-      <div className="shadow-[5px_5px_0px_0px_rgba(109,40,217)] border border-purple-700 h-[400px] w-[400px] top-64 left-28 fixed">
+      <div className="shadow-[5px_5px_0px_0px_rgba(109,40,217)] border border-purple-700 h-[400px] w-[400px] top-48 left-28 fixed">
         <div className="flex justify-center items-center flex-col m-12">
           <div className="flex">
             {user && user.addr && profile.id ? (
@@ -126,7 +127,7 @@ const Page = ({ params }) => {
                 </div>
                 <p>
                   {' '}
-                    Create a post:
+                  Create a post:
                   <Button
                     onClick={() => (!show ? setShow(true) : setShow(false))}
                   >
@@ -141,7 +142,14 @@ const Page = ({ params }) => {
         </div>
       </div>
 
-      <div></div>
+      <div className="flex justify-center w-full top-0">
+        <div className="flex justify-center ">
+          <Input onChange={(e) => setAddress(e.target.value)} type="text" />
+          <Button>
+            <Link href={`/person/${address}`}>Search</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

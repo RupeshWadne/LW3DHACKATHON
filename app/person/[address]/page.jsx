@@ -185,40 +185,14 @@ const Page = ({ params }) => {
           <>
             <div className="flex justify-center items-center flex-col w-2/3 h-full mx-auto my-4 p-6 shadow-[5px_5px_0px_0px_rgba(52,211,153)] border border-white">
               <h1 className="mt-4 font-bold text-2xl">
-                Welcome to your Profile :<span className="text-emerald-400">{user.name}</span>{' '}
+                Welcome to <span className="text-emerald-400">{user.name}</span>{' '}
+                Profile
               </h1>
 
               <h1 className="mt-4 font-semibold text-lg">
                 Address :{' '}
                 <span className="text-emerald-400">{user.address}</span>
               </h1>
-              <div>
-                <Label htmlFor="id">ID</Label>
-                <Input
-                  className="w-56 text-emerald-500 mb-3"
-                  placeholder="Post ID"
-                  id="id"
-                  type="text"
-                  onChange={(e) => setID(e.target.value)}
-                />
-                <Label htmlFor="price">Price</Label>
-                <Input
-                  className="w-56 text-emerald-500"
-                  placeholder="50.00"
-                  id="price"
-                  type="text"
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-                <p className="text-red-600 font-light text-xs">
-                  price must be decemal. Ex: 50.00
-                </p>
-                <Button className="m-2" onClick={() => listForSale()}>
-                  Lift NFT for Sale
-                </Button>
-                <Button className="m-2" onClick={() => unlistFromSale()}>
-                  Unlist an NFT from Sale
-                </Button>
-              </div>
             </div>
             <div className="flex justify-center p-8 flex-col w-2/3 mx-auto my-12 border border-white">
               <div className="flex justify-between">

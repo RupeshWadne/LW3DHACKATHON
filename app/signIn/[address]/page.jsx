@@ -80,7 +80,7 @@ const Page = ({ params }) => {
 
   return (
     <div>
-      <div className="flex justify-between m-4">
+      <div className="flex justify-around m-4">
         <h1 className="text-emerald-400 font-bold">Flowtter</h1>
         <div>{<Button onClick={() => logOut()}>Disconnect</Button>}</div>
 

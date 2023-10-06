@@ -35,16 +35,18 @@ export default function Home() {
     <div className="flex justify-center items-center h-screen m-auto flex-col">
       {
         user && user.addr ?
-        <div className="flex items-center">
+        <div className="flex flex-col items-center">
           <Button className="m-4" onClick={() => logOut()}>
             Disconnect
           </Button>
+          <Link href={`/signIn/${user?.addr}`}><p>Click to continue with this address: <span className="text-emerald-400 underline">{user?.addr}</span></p></Link>
         </div>
         :
+        <div className="flex flex-col items-center">
         <Button className="m-4" onClick={() => logIn()}>Connect</Button>
+        <p className="text-xs text-red-500">{!user?.addr && "Please Connect your wallet!!"}</p>
+        </div>
       }
-      <Link href={`/signIn/${user?.addr}`}><p>Click to continue with this address: <span className="text-emerald-400 underline">{user?.addr}</span></p></Link>
-      <p className="text-xs text-red-500">{!user?.addr && "Please Connect your wallet!!"}</p>
     </div>
   )
 }
