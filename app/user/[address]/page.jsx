@@ -23,7 +23,7 @@ fcl
   .put('accessNode.api', 'https://access-testnet.onflow.org')
   .put('discovery.wallet', 'https://fcl-discovery.onflow.org/testnet/authn')
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   const [user, setUser] = useState(params)
   const [profile, setProfile] = useState({})
 //   const [username, setUsername] = useState('')
@@ -146,4 +146,4 @@ const page = ({ params }) => {
   )
 }
 
-export default page
+export default Page
