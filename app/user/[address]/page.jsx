@@ -126,7 +126,7 @@ const Page = ({ params }) => {
                 </div>
                 <p>
                   {' '}
-                  Let's create a post:
+                    Create a post:
                   <Button
                     onClick={() => (!show ? setShow(true) : setShow(false))}
                   >
