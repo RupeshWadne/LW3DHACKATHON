@@ -26,7 +26,7 @@ fcl
 const Page = ({ params }) => {
   const [user, setUser] = useState(params)
   const [profile, setProfile] = useState({})
-//   const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('')
   const [show, setShow] = useState(false)
   const router = useRouter()
 
