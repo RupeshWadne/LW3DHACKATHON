@@ -10,7 +10,7 @@ import Post from './components/Post';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-
+import { Label } from "@/components/ui/label"
 
 import { mintNFT } from "./cadence/transactions/mint_nft"
 import { setupUserTx } from "./cadence/transactions/setup_user"
@@ -128,16 +128,17 @@ export default function Home() {
             user && user.addr ?
               <div className="flex items-center">
                 <Button onClick={() => logOut()}>
-                  Log Out
+                  Disconnect
                 </Button>
                 <Button variant="link" className="text-white">{user && user.addr ? <Link href="/">{user.addr}</Link> : "You are not logged in"}</Button>
               </div>
               :
               <>
-                <Button onClick={() => logIn()}>Login</Button>
+                <Button onClick={() => logIn()}>Connect</Button>
               </>
           }
         </div>
+        <h1 className="text-emerald-400 font-bold">Flowtter</h1>
         <Navbar />
       </div>
 
@@ -149,7 +150,7 @@ export default function Home() {
           }
           <div className="flex">
             {
-              profile.id ?
+              user && user.addr && profile.id ?
                 <div className="flex justify-between items-center flex-col p-6">
                   <p className="mb-4">Username: {profile.name}</p>
                   <Button variant="link" className="text-white mb-4"><p>Address: <Link href={`/profile/${user?.addr}`}>{user?.addr}</Link></p></Button>
@@ -166,7 +167,8 @@ export default function Home() {
                         <p className="text-xs font-medium text-red-500">*Sign in if you already have an account</p>
                         <p>OR</p>
                         <div>
-                          <Input type="text" className="mb-4" onChange={(e) => setUsername(e.target.value)} />
+                          <Label htmlFor="username">Username</Label>
+                          <Input id="username" type="text" className="mb-4" onChange={(e) => setUsername(e.target.value)} />
                           <Button onClick={() => setupUser(username)}>Setup User</Button>
                         </div>
                       </div> :

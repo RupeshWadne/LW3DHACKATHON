@@ -231,18 +231,13 @@ const Page = ({ params }) => {
                                 {nft.metadata.description}
                               </span>
                             </h1>
-                            <div>{}</div>
-                            <h1 className="ml-4 mt-1">
-                              {key}:{' '}
-                              <span className="text-emerald-400">{value}</span>
-                            </h1>
-
                             <h1 className="ml-4 mt-1">
                               Likes:{' '}
                               <span className="text-emerald-400">
                                 {nft.likeCount}
                               </span>
                             </h1>
+                            <div className="flex justify-between items-center">
                             <Button
                               varient="outline"
                               className="w-36 ml-4 my-2 bg-gray-50 text-emerald-400"
@@ -250,6 +245,21 @@ const Page = ({ params }) => {
                             >
                               Like
                             </Button>
+                            <div className="flex items-center">
+                            
+                            <h1 className="ml-4 mt-1">
+                              {key}:{' '}
+                              <span className="text-emerald-400">{value}</span>
+                            </h1>
+                            <Button
+                              varient="outline"
+                              className="w-36 ml-4 my-2 bg-gray-50 text-emerald-400"
+                            >
+                              Comment
+                            </Button>
+                            </div>
+                            </div>
+                            
                           </div>
                         )
                       }
