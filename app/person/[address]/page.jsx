@@ -272,7 +272,7 @@ const Page = ({ params }) => {
                           {
                                 Object.entries(nft.stringDictionary).map(
                                   (t, k) => (
-                                    <div className="flex items-center mt-1">
+                                    <div key={k} className="flex items-center mt-1">
                                       <h1 className="ml-4 mr-8">{t[0]}: </h1>
                                       <span className="text-emerald-400">
                                       {t[1]}
